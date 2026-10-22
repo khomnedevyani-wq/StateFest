@@ -1,0 +1,13 @@
+{
+  "name": "statefest",
+  "version": "1.0.0",
+  "description": "StateFest - State-Level Event Management System for Maharashtra Colleges",
+  "scripts": {
+    "start": "node backend/server.js",
+    "seed": "node backend/scripts/seedEvents.js",
+    "create-admin": "node backend/scripts/createAdmin.js"
+  },
+  "keywords": ["statefest", "event-management", "college-project"],
+  "author": "StateFest Team",
+  "license": "ISC"
+}

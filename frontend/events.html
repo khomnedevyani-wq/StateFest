@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Events — StateFest</title>
+  <meta name="description" content="Explore and filter state-level collegiate events across Maharashtra by category, city, and date.">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-statefest">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <div class="brand-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+        <span>StateFest</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="events.html">Explore Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div id="navbarAuthSection" class="d-flex align-items-center gap-2"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="py-5 text-white" style="background: linear-gradient(135deg, #090d16 0%, #0f172a 60%, #1e1b4b 100%);">
+    <div class="container text-center">
+      <span class="badge bg-primary bg-opacity-25 text-light border border-primary px-3 py-2 rounded-pill mb-2">
+        <i class="fa-solid fa-calendar-check me-1"></i> Maharashtra Collegiate Calendar 2026
+      </span>
+      <h1 class="display-5 fw-bold text-white mb-2">Explore State Events</h1>
+      <p class="lead text-light opacity-75 max-w-600 mx-auto" style="max-width: 600px;">
+        Filter through hackathons, cultural festivals, athletic tournaments, and academic symposiums hosted by colleges across Maharashtra.
+      </p>
+    </div>
+  </div>
+
+  <!-- Search & Filter Controls -->
+  <div class="container mt-n4" style="margin-top: -25px; position: relative; z-index: 10;">
+    <div class="bg-white p-4 rounded-4 shadow-md border">
+      <div class="row g-3 align-items-center">
+        <!-- Search bar -->
+        <div class="col-lg-4 col-md-6">
+          <label class="form-label small text-muted mb-1"><i class="fa-solid fa-magnifying-glass me-1"></i> Search by Title / Keyword</label>
+          <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="E.g., Hackathon, Robotics, Dance...">
+          </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="col-lg-3 col-md-6">
+          <label class="form-label small text-muted mb-1"><i class="fa-solid fa-shapes me-1"></i> Event Category</label>
+          <select id="categoryFilter" class="form-select">
+            <option value="All">All Categories</option>
+            <option value="Technical">Technical</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Sports">Sports</option>
+            <option value="Workshops">Workshops</option>
+            <option value="Academic">Academic</option>
+          </select>
+        </div>
+
+        <!-- City Filter -->
+        <div class="col-lg-2 col-md-6">
+          <label class="form-label small text-muted mb-1"><i class="fa-solid fa-location-dot me-1"></i> City</label>
+          <select id="cityFilter" class="form-select">
+            <option value="All">All Cities</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Pune">Pune</option>
+            <option value="Sangli">Sangli</option>
+            <option value="Aurangabad">Aurangabad</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Nagpur">Nagpur</option>
+          </select>
+        </div>
+
+        <!-- Sort Filter -->
+        <div class="col-lg-2 col-md-6">
+          <label class="form-label small text-muted mb-1"><i class="fa-solid fa-arrow-down-short-wide me-1"></i> Sort By</label>
+          <select id="sortFilter" class="form-select">
+            <option value="date_asc">Upcoming Soonest</option>
+            <option value="date_desc">Latest Date</option>
+            <option value="fee_asc">Fee: Low to High</option>
+            <option value="fee_desc">Fee: High to Low</option>
+            <option value="popular">Most Registered</option>
+          </select>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="col-lg-1 col-md-12 text-end">
+          <label class="form-label d-none d-lg-block mb-1">&nbsp;</label>
+          <button id="resetFiltersBtn" class="btn btn-outline-secondary w-100" title="Reset Filters">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events Listing Container -->
+  <main class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold mb-0 text-dark">
+        Upcoming Collegiate Events
+      </h4>
+      <span class="badge bg-primary-subtle text-primary border px-3 py-2 rounded-pill font-monospace" id="eventsCountBadge">
+        Loading...
+      </span>
+    </div>
+
+    <!-- Dynamic Event Cards Grid -->
+    <div class="row g-4" id="eventsGrid">
+      <!-- Injected by events.js -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyEventsState" class="text-center py-5 d-none">
+      <div class="py-5">
+        <div class="mb-3 text-muted" style="font-size: 3.5rem;">
+          <i class="fa-solid fa-filter-circle-xmark text-secondary opacity-50"></i>
+        </div>
+        <h4 class="fw-bold text-dark">No Events Match Your Filters</h4>
+        <p class="text-muted max-w-500 mx-auto" style="max-width: 480px;">
+          We couldn't find any state events matching the selected title, category, or city. Try adjusting or resetting your filter criteria.
+        </p>
+        <button class="btn btn-statefest-primary mt-2" onclick="document.getElementById('resetFiltersBtn').click()">
+          <i class="fa-solid fa-arrows-rotate me-1"></i> Clear Filters
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-statefest">
+    <div class="container text-center">
+      <p class="small text-secondary mb-1">
+        StateFest &bull; State-Level Event Management System &bull; Designed for Maharashtra Colleges
+      </p>
+      <div class="small text-secondary">
+        &copy; 2026 StateFest. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Application & Events JS -->
+  <script src="js/app.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>
